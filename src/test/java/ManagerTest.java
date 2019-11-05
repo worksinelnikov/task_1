@@ -4,22 +4,22 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ProgerTest {
-    private Proger proger;
+public class ManagerTest {
 
+    private Manager manager;
     @Before
     public void setUp() throws Exception {
-        proger = new Proger("Ivanov", 10000, 100);
+        manager = new Manager("Petrov", 10000, 100);
     }
 
     @After
     public void tearDown() throws Exception {
-        proger = null;
+        manager = null;
     }
 
     @Test
     public void getMonthSalary() {
-        proger.setWorkedHours(50);
-        assertEquals(5000.0, proger.getMonthSalary(), 0.0);
+        manager.setWorkedHours(150);
+        assertEquals(10000, manager.getMonthSalary(), 0);
     }
 }
