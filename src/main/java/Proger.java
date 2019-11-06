@@ -9,6 +9,7 @@ public class Proger extends Employee {
 
     @Override
     protected double getMonthSalary(int hoursPerMonth) {
-        return salaryPerMonth * getHoursPercent(hoursPerMonth) / PERCENT;
+        double salary = salaryPerMonth * getHoursPercent(hoursPerMonth) / PERCENT;
+        return Math.round(salary * 100.0) / 100.0;
     }
 }

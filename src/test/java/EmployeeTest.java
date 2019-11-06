@@ -25,7 +25,7 @@ public class EmployeeTest {
     @Test
     public void getHoursPercent() {
         employee.salaryPerMonth = 10000;
-        employee.workedHours = 100;
-        assertEquals(5000, employee.getHoursPercent(50), 0);
+        employee.workedHours = 50;
+        assertEquals(50, employee.getHoursPercent(100), 0);
     }
 }
