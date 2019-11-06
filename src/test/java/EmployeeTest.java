@@ -11,13 +11,8 @@ public class EmployeeTest {
     public void setUp() throws Exception {
         employee = new Employee() {
             @Override
-            protected double getMonthSalary() {
+            protected double getMonthSalary(int hoursPerMonth) {
                 return 0;
-            }
-
-            @Override
-            public void setWorkedHours(double workedHours) {
-
             }
         };
     }
@@ -29,7 +24,8 @@ public class EmployeeTest {
 
     @Test
     public void getHoursPercent() {
-        employee.setHours(200);
-        assertEquals(25, employee.getHoursPercent(50), 0);
+        employee.salaryPerMonth = 10000;
+        employee.workedHours = 100;
+        assertEquals(5000, employee.getHoursPercent(50), 0);
     }
 }

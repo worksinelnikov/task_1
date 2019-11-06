@@ -25,9 +25,10 @@ public class Booker {
         return false;
     }
 
-    public double calculateSalary() {
+    public double calculateSalary(int hoursInMonth) {
+
         if (employees != null && !employees.isEmpty()) {
-            return employees.stream().mapToDouble(Employee::getMonthSalary).sum();
+            return employees.stream().mapToDouble(c -> c.getMonthSalary(hoursInMonth)).sum();
         }
         return 0;
     }

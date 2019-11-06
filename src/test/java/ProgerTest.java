@@ -9,7 +9,7 @@ public class ProgerTest {
 
     @Before
     public void setUp() throws Exception {
-        proger = new Proger("Ivanov", 10000, 100);
+        proger = new Proger("Ivanov", "+380",10000, 100);
     }
 
     @After
@@ -19,7 +19,6 @@ public class ProgerTest {
 
     @Test
     public void getMonthSalary() {
-        proger.setWorkedHours(50);
-        assertEquals(5000.0, proger.getMonthSalary(), 0.0);
+        assertEquals(5000.0, proger.getMonthSalary(200), 0.0);
     }
 }

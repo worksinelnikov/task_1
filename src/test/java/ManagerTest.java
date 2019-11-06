@@ -9,7 +9,7 @@ public class ManagerTest {
     private Manager manager;
     @Before
     public void setUp() throws Exception {
-        manager = new Manager("Petrov", 10000, 100);
+        manager = new Manager("Petrov", "+380",10000, 50);
     }
 
     @After
@@ -19,7 +19,7 @@ public class ManagerTest {
 
     @Test
     public void getMonthSalary() {
-        manager.setWorkedHours(150);
-        assertEquals(10000, manager.getMonthSalary(), 0);
+        assertEquals(5000, manager.getMonthSalary(100), 0);
+        assertEquals(10000, manager.getMonthSalary(10), 0);
     }
 }

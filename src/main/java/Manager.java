@@ -1,22 +1,14 @@
 public class Manager extends Employee {
-    private double workedHours;
 
-    public double getWorkedHours() {
-        return workedHours;
-    }
-
-    public void setWorkedHours(double workedHours) {
+    public Manager(String name, String phone, double salaryPerMonth, double workedHours) {
+        this.name = name;
+        this.phone = phone;
+        this.salaryPerMonth = salaryPerMonth;
         this.workedHours = workedHours;
     }
 
-    public Manager(String name, double salary, double hours) {
-        this.name = name;
-        this.salary = salary;
-        this.hours = hours;
-    }
-
     @Override
-    protected double getMonthSalary() {
-        return getHoursPercent(workedHours) >= 100 ? salary : getHoursPercent(workedHours) * salary / 100;
+    protected double getMonthSalary(int hoursPerMonth) {
+        return workedHours >= hoursPerMonth ? salaryPerMonth : salaryPerMonth * getHoursPercent(hoursPerMonth) / PERCENT;
     }
 }

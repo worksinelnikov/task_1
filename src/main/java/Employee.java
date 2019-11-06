@@ -1,37 +1,46 @@
 public abstract class Employee {
     protected String name;
-    protected double salary;
-    protected double hours;
+    protected String phone;
+    protected double salaryPerMonth;
+    protected double workedHours;
+    protected static final int PERCENT = 100;
 
     public String getName() {
         return name;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public double getSalary() {
-        return salary;
+    public String getPhone() {
+        return phone;
     }
 
-    private void setSalary(double salary) {
-        this.salary = salary;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public double getHours() {
-        return hours;
+    public double getSalaryPerMonth() {
+        return salaryPerMonth;
     }
 
-    public void setHours(double hours) {
-        this.hours = hours;
+    public void setSalaryPerMonth(double salaryPerMonth) {
+        this.salaryPerMonth = salaryPerMonth;
     }
 
-    public double getHoursPercent(double workedHours) {
-        return workedHours * 100 / hours;
+    public double getWorkedHours() {
+        return workedHours;
     }
 
-    protected abstract double getMonthSalary();
+    public void setWorkedHours(double workedHours) {
+        this.workedHours = workedHours;
+    }
 
-    public abstract void setWorkedHours(double workedHours);
+    protected double getHoursPercent(int hoursPerMonth) {
+        return workedHours * PERCENT / hoursPerMonth;
+    }
+
+    protected abstract double getMonthSalary(int hoursPerMonth);
+
 }
