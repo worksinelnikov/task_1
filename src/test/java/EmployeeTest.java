@@ -9,7 +9,7 @@ public class EmployeeTest {
 
     @Before
     public void setUp() throws Exception {
-        employee = new Employee() {
+        employee = new Employee("Ivanov", "+380", 10000, 50) {
             @Override
             protected double getMonthSalary(int hoursPerMonth) {
                 return 0;
@@ -24,8 +24,6 @@ public class EmployeeTest {
 
     @Test
     public void getHoursPercent() {
-        employee.salaryPerMonth = 10000;
-        employee.workedHours = 50;
         assertEquals(50, employee.getHoursPercent(100), 0);
     }
 }

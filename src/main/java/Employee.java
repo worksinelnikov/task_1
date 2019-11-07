@@ -1,9 +1,9 @@
 public abstract class Employee {
-    protected String name;
-    protected String phone;
-    protected double salaryPerMonth;
-    protected double workedHours;
-    protected static final int PERCENT = 100;
+    private String name;
+    private String phone;
+    private double salaryPerMonth;
+    private double workedHours;
+    final int PERCENT = 100;
 
     public String getName() {
         return name;
@@ -34,6 +34,13 @@ public abstract class Employee {
     }
 
     public void setWorkedHours(double workedHours) {
+        this.workedHours = workedHours;
+    }
+
+    public Employee(String name, String phone, double salaryPerMonth, double workedHours) {
+        this.name = name;
+        this.phone = phone;
+        this.salaryPerMonth = salaryPerMonth;
         this.workedHours = workedHours;
     }
 

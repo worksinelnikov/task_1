@@ -1,15 +1,12 @@
 public class Proger extends Employee {
 
     public Proger(String name, String phone, double salaryPerMonth, double workedHours) {
-        this.name = name;
-        this.phone = phone;
-        this.salaryPerMonth = salaryPerMonth;
-        this.workedHours = workedHours;
+        super(name, phone, salaryPerMonth, workedHours);
     }
 
     @Override
     protected double getMonthSalary(int hoursPerMonth) {
-        double salary = salaryPerMonth * getHoursPercent(hoursPerMonth) / PERCENT;
+        double salary = getSalaryPerMonth() * getHoursPercent(hoursPerMonth) / PERCENT;
         return Math.round(salary * 100.0) / 100.0;
     }
 }
