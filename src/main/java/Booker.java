@@ -1,3 +1,8 @@
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
@@ -37,7 +42,7 @@ public class Booker {
         return 0;
     }
 
-    public boolean writeToXml(String fileName) throws IOException {
+    public boolean writeToXml(String fileName) {
         try (XMLEncoder xmlEncoder = new XMLEncoder(new BufferedOutputStream(
                 new FileOutputStream(String.format("%s.xml", fileName))))) {
             xmlEncoder.writeObject(this.getEmployees());
@@ -49,16 +54,42 @@ public class Booker {
 
     }
 
-    public boolean readFromXml(String fileName) throws IOException{
+    public boolean readFromXml(String fileName) {
         List<Employee> employees = new ArrayList<>();
         try (XMLDecoder xmlDecoder = new XMLDecoder((new BufferedInputStream(
-                new FileInputStream(String.format("%s.xml", fileName)))))){
-            employees = (ArrayList<Employee>)xmlDecoder.readObject();
+                new FileInputStream(String.format("%s.xml", fileName)))))) {
+            employees = (ArrayList<Employee>) xmlDecoder.readObject();
             this.setEmployees(employees);
             return true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean writeToJson(String fileName) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(String.format("%s.json", fileName))) {
+            ObjectMapper mapper = new ObjectMapper();
+            ObjectWriter objectWriter = mapper.writer().forType(new TypeReference<List<Employee>>(){});
+            objectWriter.writeValue(fileOutputStream,this.getEmployees());
+            //mapper.writeValue(fileOutputStream, this.getEmployees());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean readFromJson(String fileName) throws IOException {
+
+        try (FileInputStream fileInputStream = new FileInputStream(String.format("%s.json", fileName))) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectReader objectReader = objectMapper.reader().forType(new TypeReference<List<Employee>>(){});
+            List<Employee> employees = objectReader.readValue(fileInputStream);
+            this.setEmployees(employees);
+            return true;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
             return false;
         }
     }

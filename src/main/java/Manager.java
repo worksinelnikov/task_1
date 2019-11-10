@@ -6,8 +6,8 @@ public class Manager extends Employee{
     }
 
     @Override
-    protected double getMonthSalary(int hoursPerMonth) {
-        double salary = getWorkedHours() >= hoursPerMonth ? getSalaryPerMonth() : getSalaryPerMonth() * getHoursPercent(hoursPerMonth) / PERCENT;
+    public double getMonthSalary(int hoursPerMonth) {
+        double salary = getWorkedHours() >= hoursPerMonth ? getSalaryPerMonth() : super.getMonthSalary(hoursPerMonth);
         return Math.round(salary * 100.0) / 100.0;
     }
 }

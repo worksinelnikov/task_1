@@ -1,17 +1,24 @@
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author Oleg Sinelnikov 2019
  * @version 1.0
  */
-public abstract class Employee implements Serializable {
+
+@JsonAutoDetect
+public class Employee implements Serializable {
     private String name;
     private String phone;
     private double salaryPerMonth;
     private double workedHours;
-    final int PERCENT = 100;
+    @JsonIgnore
+    public final int PERCENT = 100;
 
-    protected Employee() {
+    public Employee() {
     }
 
     public String getName() {
@@ -61,7 +68,7 @@ public abstract class Employee implements Serializable {
         this.workedHours = workedHours;
     }
 
-    protected double getHoursPercent(int hoursPerMonth) {
+    public double getHoursPercent(int hoursPerMonth) {
         return workedHours * PERCENT / hoursPerMonth;
     }
 
@@ -71,10 +78,29 @@ public abstract class Employee implements Serializable {
      * @param hoursPerMonth - parameter for Booker
      * @return double value Math.round in 2
      */
-    protected abstract double getMonthSalary(int hoursPerMonth);
-
+    //protected abstract double getMonthSalary(int hoursPerMonth);
+    protected double getMonthSalary(int hoursPerMonth){
+        double salary = getSalaryPerMonth() * getHoursPercent(hoursPerMonth) / PERCENT;
+        return Math.round(salary * 100.0) / 100.0;
+    }
     @Override
     public String toString() {
         return String.format("Name: %s (phone %s)\tSalary per month: $%.2f\tWorked hours: %.2f", name, phone, salaryPerMonth, workedHours);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Double.compare(employee.salaryPerMonth, salaryPerMonth) == 0 &&
+                Double.compare(employee.workedHours, workedHours) == 0 &&
+                name.equals(employee.name) &&
+                phone.equals(employee.phone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, phone, salaryPerMonth, workedHours, PERCENT);
     }
 }

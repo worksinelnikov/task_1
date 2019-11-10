@@ -11,7 +11,7 @@ public class EmployeeTest {
     public void setUp() throws Exception {
         employee = new Employee("Ivanov", "+380", 10000, 50) {
             @Override
-            protected double getMonthSalary(int hoursPerMonth) {
+            public double getMonthSalary(int hoursPerMonth) {
                 return 0;
             }
         };
