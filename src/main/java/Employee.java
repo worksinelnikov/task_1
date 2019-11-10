@@ -1,13 +1,18 @@
+import java.io.Serializable;
+
 /**
  * @author Oleg Sinelnikov 2019
  * @version 1.0
  */
-public abstract class Employee {
+public abstract class Employee implements Serializable {
     private String name;
     private String phone;
     private double salaryPerMonth;
     private double workedHours;
     final int PERCENT = 100;
+
+    protected Employee() {
+    }
 
     public String getName() {
         return name;
@@ -43,10 +48,11 @@ public abstract class Employee {
 
     /**
      * Constructor with params
-     * @param name - employee name
-     * @param phone - employee phone
+     *
+     * @param name           - employee name
+     * @param phone          - employee phone
      * @param salaryPerMonth - employee salary per month
-     * @param workedHours - employee worked hours per month
+     * @param workedHours    - employee worked hours per month
      */
     public Employee(String name, String phone, double salaryPerMonth, double workedHours) {
         this.name = name;
@@ -61,9 +67,14 @@ public abstract class Employee {
 
     /**
      * calculate Salary method, must be overridden in child classes
+     *
      * @param hoursPerMonth - parameter for Booker
      * @return double value Math.round in 2
      */
     protected abstract double getMonthSalary(int hoursPerMonth);
 
+    @Override
+    public String toString() {
+        return String.format("Name: %s (phone %s)\tSalary per month: $%.2f\tWorked hours: %.2f", name, phone, salaryPerMonth, workedHours);
+    }
 }

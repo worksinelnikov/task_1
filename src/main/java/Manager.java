@@ -1,4 +1,5 @@
-public class Manager extends Employee {
+public class Manager extends Employee{
+    public Manager() {}
 
     public Manager(String name, String phone, double salaryPerMonth, double workedHours) {
         super(name, phone, salaryPerMonth, workedHours);
