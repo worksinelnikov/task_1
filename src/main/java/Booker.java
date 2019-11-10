@@ -9,7 +9,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 public class Booker {
+
+    private static final Logger LOGGER = Logger.getLogger(Booker.class);
 
     private List<Employee> employees;
 
@@ -46,9 +50,11 @@ public class Booker {
         try (XMLEncoder xmlEncoder = new XMLEncoder(new BufferedOutputStream(
                 new FileOutputStream(String.format("%s.xml", fileName))))) {
             xmlEncoder.writeObject(this.getEmployees());
+            LOGGER.info("Object was written to XML file");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
+            LOGGER.error("Error. Object wasn't written!");
             return false;
         }
 
@@ -70,12 +76,12 @@ public class Booker {
     public boolean writeToJson(String fileName) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(String.format("%s.json", fileName))) {
             ObjectMapper mapper = new ObjectMapper();
-            ObjectWriter objectWriter = mapper.writer().forType(new TypeReference<List<Employee>>(){});
-            objectWriter.writeValue(fileOutputStream,this.getEmployees());
-            //mapper.writeValue(fileOutputStream, this.getEmployees());
+            mapper.writeValue(fileOutputStream, this.getEmployees());
+            LOGGER.info("Object was written to XML file");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
+            LOGGER.error("Error. Object wasn't written!");
             return false;
         }
     }
@@ -84,11 +90,12 @@ public class Booker {
 
         try (FileInputStream fileInputStream = new FileInputStream(String.format("%s.json", fileName))) {
             ObjectMapper objectMapper = new ObjectMapper();
-            ObjectReader objectReader = objectMapper.reader().forType(new TypeReference<List<Employee>>(){});
+            ObjectReader objectReader = objectMapper.reader().forType(new TypeReference<List<Employee>>() {
+            });
             List<Employee> employees = objectReader.readValue(fileInputStream);
             this.setEmployees(employees);
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
         }
