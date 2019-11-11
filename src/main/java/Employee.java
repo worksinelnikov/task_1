@@ -93,10 +93,7 @@ public class Employee implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Double.compare(employee.salaryPerMonth, salaryPerMonth) == 0 &&
-                Double.compare(employee.workedHours, workedHours) == 0 &&
-                name.equals(employee.name) &&
-                phone.equals(employee.phone);
+        return name.equals(employee.name) && phone.equals(employee.phone);
     }
 
     @Override
